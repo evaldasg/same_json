@@ -1,3 +1,45 @@
 <div class="container">
-  
+  <div class="center-block" style="text-align:center;">
+    <%= form_tag("/bonus_counter", method: "get", class: 'form-inline bonus-form', role: 'form') do %>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <%= label_tag(:id, "Bonus for:") %>
+          </div>
+          <%= text_field_tag(:id, nil, { class: 'form-control', placeholder: 'Enter user id' }) %>
+        </div>
+      </div>
+      <%= submit_tag("Count bonus", name: nil, class: 'btn btn-default') %>
+    <% end %>
+  </div>
+  <% unless @bonus_amount.nil? %>
+  <div class="row">
+    <p><strong>User has <%= @bonus_amount %> bonus.</strong></p>
+  </div>
+  <% end %>
+  <% unless @bonus.nil? || @bonus.empty? %>
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table  table-bordered">
+        <thead>
+            <tr>
+              <th>Bonus ID</th>
+              <th>Bonus amount</th>
+              <th>Bonus date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bonus.each do |b| %>
+            <tr>
+              <td><%= b["rel_id"] %></td>
+              <td><%= b["amount"] %></td>
+              <td><%= b["date"] %></td>
+            </tr>
+            <% end %>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  <% end %>
 </div>
